@@ -1,14 +1,16 @@
 [features]
 seeds = false
-skip-lint = false
+[programs.localnet]
+hello_world = "2MVfj8ghRjjioXeW7rBAUHvWjTDQuw8WJqZAvQaJJAED"
+
 [programs.devnet]
-hello_world = "3PawvNMSTx2QrUhRGqr7aqDTuDhM2AZVqq9gn3zm6oXT"
+hello_world = "2MVfj8ghRjjioXeW7rBAUHvWjTDQuw8WJqZAvQaJJAED"
 
 [registry]
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "Devnet"
+cluster = "devnet"
 wallet = "/Users/alsjourney/.config/solana/id.json"
 
 [scripts]

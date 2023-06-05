@@ -1,15 +1,18 @@
 use anchor_lang::prelude::*;
 
-declare_id!("3PawvNMSTx2QrUhRGqr7aqDTuDhM2AZVqq9gn3zm6oXT");
+declare_id!("2MVfj8ghRjjioXeW7rBAUHvWjTDQuw8WJqZAvQaJJAED");
 
 #[program]
 pub mod hello_world {
     use super::*;
 
     pub fn initialize(ctx: Context<Initialize>) -> Result<()> {
+        msg!("Initializing new MyAccount account");
         let my_account = &mut ctx.accounts.my_account;
+        msg!("Account address: {}", my_account.key());
         my_account.data = 0;
         my_account.authority = *ctx.accounts.authority.key;
+        msg!("Account data: {:?}", my_account);
         Ok(())
     }
 
@@ -24,7 +27,7 @@ pub mod hello_world {
             return Err(error!(ErrorCode::BelowZero));
         }
         my_account.data -= 1;
-        Ok(())
+         Ok(())
     }
     pub fn set(ctx: Context<Update>, value: u64) -> Result<()> {
         let my_account = &mut ctx.accounts.my_account;
@@ -39,24 +42,24 @@ pub struct Initialize<'info> {
     #[account(mut)]
     pub authority: Signer<'info>,
 
-    #[account(init, payer=authority, space= 8 + 32 + 8)]
+    #[account(init, payer = authority, space = 8 + 32 + 8)]
     pub my_account: Account<'info, MyAccount>,
 
     pub system_program: Program<'info, System>,
 }
 
-#[account]
-#[derive(Default)]
-pub struct MyAccount {
-    authority: Pubkey,
-    data: u64,
-}
-
 #[derive(Accounts)]
 pub struct Update<'info> {
-    #[account(mut, has_one=authority)]
+    #[account(mut, has_one = authority)]
     pub my_account: Account<'info, MyAccount>,
-    pub authority: Signer<'info>,
+    pub authority: Signer<'info>
+}
+
+#[account]
+#[derive(Default, Debug)]
+pub struct MyAccount {
+    authority: Pubkey,
+     data: u64
 }
 
 #[error_code]
