@@ -156,7 +156,7 @@ const Content: React.FC = () => {
   };
   return (
     <div className="flex flex-col items-center">
-      <h1 className="absolute top-48 text-4xl font-bold text-white">
+      <h1 className="mb-4 text-center text-4xl font-bold text-white">
         {" "}
         Solana Counter on Devnet
       </h1>
